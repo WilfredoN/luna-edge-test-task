@@ -1,4 +1,4 @@
 export interface Trainer {
-    firstName: string;
-    lastName: string;
+  firstName: string
+  lastName: string
 }

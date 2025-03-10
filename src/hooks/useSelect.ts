@@ -1,25 +1,25 @@
-import { MutableRefObject, useCallback, useEffect, useState } from 'react';
-import { SelectOption } from '../types';
+import { MutableRefObject, useCallback, useEffect, useState } from 'react'
+import { SelectOption } from '../types'
 
 interface UseSelectProps {
-  options: SelectOption[];
-  value: SelectOption[];
-  onChange: (value: SelectOption[]) => void;
-  onSearch?: (query: string) => void;
-  maxSelections?: number;
-  loading?: boolean;
-  onPaginationEnd?: () => void;
-  listRef: MutableRefObject<HTMLDivElement | null>;
+  options: SelectOption[]
+  value: SelectOption[]
+  onChange: (value: SelectOption[]) => void
+  onSearch?: (query: string) => void
+  maxSelections?: number
+  loading?: boolean
+  onPaginationEnd?: () => void
+  listRef: MutableRefObject<HTMLDivElement | null>
 }
 
 interface UseSelectResult {
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-  search: string;
-  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSelect: (option: SelectOption) => void;
-  removeSelection: (option: SelectOption, e: React.MouseEvent) => void;
-  handleScroll: () => void;
+  isOpen: boolean
+  setIsOpen: (open: boolean) => void
+  search: string
+  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleSelect: (option: SelectOption) => void
+  removeSelection: (option: SelectOption, e: React.MouseEvent) => void
+  handleScroll: () => void
 }
 
 export const useSelect = ({
@@ -30,53 +30,53 @@ export const useSelect = ({
   maxSelections,
   loading,
   onPaginationEnd,
-  listRef
+  listRef,
 }: UseSelectProps): UseSelectResult => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [isOpen, setIsOpen] = useState(false)
+  const [search, setSearch] = useState('')
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setSearch(query);
+    const query = e.target.value
+    setSearch(query)
 
     if (onSearch) {
-      onSearch(query);
+      onSearch(query)
     }
-  };
+  }
 
   const handleSelect = (option: SelectOption) => {
     if (value.some((item) => item.value === option.value)) {
-      onChange(value.filter((item) => item.value !== option.value));
+      onChange(value.filter((item) => item.value !== option.value))
     } else {
       if (maxSelections && value.length >= maxSelections) {
-        onChange([...value.slice(1), option]);
+        onChange([...value.slice(1), option])
       } else {
-        onChange([...value, option]);
+        onChange([...value, option])
       }
     }
-  };
+  }
 
   const removeSelection = (option: SelectOption, e: React.MouseEvent) => {
-    e.stopPropagation();
-    onChange(value.filter((item) => item.value !== option.value));
-  };
+    e.stopPropagation()
+    onChange(value.filter((item) => item.value !== option.value))
+  }
 
   const handleScroll = useCallback(() => {
-    if (!listRef.current || !onPaginationEnd) return;
+    if (!listRef.current || !onPaginationEnd) return
 
-    const { scrollTop, scrollHeight, clientHeight } = listRef.current;
+    const { scrollTop, scrollHeight, clientHeight } = listRef.current
 
     if (scrollHeight - (scrollTop + clientHeight) < 50 && !loading) {
-      onPaginationEnd();
+      onPaginationEnd()
     }
-  }, [loading, onPaginationEnd, listRef]);
+  }, [loading, onPaginationEnd, listRef])
 
   useEffect(() => {
-    const listElement = listRef.current;
+    const listElement = listRef.current
     if (isOpen && listElement && onPaginationEnd) {
-      handleScroll();
+      handleScroll()
     }
-  }, [isOpen, options.length, handleScroll, onPaginationEnd, listRef]);
+  }, [isOpen, options.length, handleScroll, onPaginationEnd, listRef])
 
   return {
     isOpen,
@@ -85,6 +85,6 @@ export const useSelect = ({
     handleSearchChange,
     handleSelect,
     removeSelection,
-    handleScroll
-  };
-};
+    handleScroll,
+  }
+}
