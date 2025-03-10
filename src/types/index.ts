@@ -11,7 +11,7 @@ export interface SelectOption {
   image?: string;
   imageUrl?: string;
   url?: string;
-  uniqueId?: string; // Add uniqueId for React keys
+  uniqueId?: string;
 }
 
 export interface PaginationMeta {
