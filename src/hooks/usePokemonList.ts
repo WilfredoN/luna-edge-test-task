@@ -44,7 +44,6 @@ export const usePokemonList = (): UsePokemonListResult => {
         if (!searchQuery) {
           setPokemonOptions((prev) => [...prev, ...newOptions])
         } else {
-          // If we're searching, filter the new results too
           const filteredNewOptions = newOptions.filter((option) =>
             option.label.toLowerCase().includes(searchQuery.toLowerCase()),
           )
@@ -86,7 +85,6 @@ export const usePokemonList = (): UsePokemonListResult => {
     [allPokemonOptions],
   )
 
-  // Initial load
   useEffect(() => {
     loadPokemon(0)
   }, [])

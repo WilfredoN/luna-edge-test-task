@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { Select } from '../components/ui/Select'
 import '../index.css'
 import { SelectOption } from '../types'
-// Mock Pokemon data for examples
 const pokemonOptions: SelectOption[] = [
   {
     value: '1',
@@ -138,7 +137,6 @@ export const Default: Story = {
   },
 }
 
-// Pre-selected options example
 export const WithPreselectedOptions: Story = {
   args: {
     options: pokemonOptions,
@@ -162,7 +160,6 @@ export const WithPreselectedOptions: Story = {
   },
 }
 
-// Error state example
 export const WithError: Story = {
   args: {
     options: pokemonOptions,
@@ -183,7 +180,6 @@ export const WithError: Story = {
   },
 }
 
-// Max selections example
 export const MaxSelectionsReached: Story = {
   args: {
     options: pokemonOptions,
@@ -209,7 +205,6 @@ export const MaxSelectionsReached: Story = {
   },
 }
 
-// Loading state example
 export const Loading: Story = {
   args: {
     options: [],
@@ -231,7 +226,6 @@ export const Loading: Story = {
   },
 }
 
-// Search functionality example
 export const SearchFunctionality: Story = {
   args: {
     options: pokemonOptions,
@@ -266,7 +260,6 @@ export const SearchFunctionality: Story = {
   },
 }
 
-// Example with pagination simulation
 export const WithPagination: Story = {
   args: {
     options: pokemonOptions.slice(0, 3),
@@ -283,7 +276,6 @@ export const WithPagination: Story = {
     const handlePaginationEnd = () => {
       if (options.length < pokemonOptions.length) {
         setIsLoading(true)
-        // Simulate API delay
         setTimeout(() => {
           setOptions([...options, ...pokemonOptions.slice(options.length, options.length + 2)])
           setIsLoading(false)
