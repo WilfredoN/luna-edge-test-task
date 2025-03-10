@@ -7,7 +7,7 @@ interface MainLayoutProps {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <main className="h-screen w-screen bg-gradient-to-b from-gray-800 to-gray-900 p-4">
+    <main className="min-h-screen min-w-screen bg-gradient-to-b from-gray-800 to-gray-900 p-4">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

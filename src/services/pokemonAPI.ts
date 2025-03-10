@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { PaginatedResponse, Pokemon } from '../types'
+import { PaginatedResponse, Pokemon, PokemonType } from '../types'
 
 const API_URL = import.meta.env.VITE_API_POKEAPI_URL
 
@@ -34,12 +34,12 @@ export const fetchPokemonList = async (
 export const fetchPokemonDetails = async (nameOrId: string | number): Promise<Pokemon | null> => {
   try {
     const response = await axios.get(`${API_URL}/pokemon/${nameOrId}`)
-
+    console.log(response.data)
     return {
       id: response.data.id,
       name: response.data.name,
       image: response.data.sprites.front_default,
-      types: response.data.types.map((type: any) => type.type.name),
+      types: response.data.types.map((type: PokemonType) => type.type.name),
     }
   } catch (error) {
     console.error(`Error fetching details for Pokemon ${nameOrId}:`, error)

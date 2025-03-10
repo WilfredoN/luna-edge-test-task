@@ -49,7 +49,7 @@ export const TrainerForm = ({ onFormSubmit }: TrainerFormProps) => {
       transition={{ duration: 0.5 }}
       className="w-full max-w-2xl rounded-lg bg-gray-800 p-6 shadow-lg"
     >
-      <h2 className="mb-6 text-2xl font-bold text-white">Register for Battle Tower</h2>
+      <h2 className="mb-6 text-center text-4xl font-bold text-white">Register Form</h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -114,7 +114,7 @@ export const TrainerForm = ({ onFormSubmit }: TrainerFormProps) => {
 
         <motion.button
           type="submit"
-          className="mt-6 w-full rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="mt-6 w-full cursor-pointer rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

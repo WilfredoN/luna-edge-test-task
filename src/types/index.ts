@@ -24,3 +24,13 @@ export interface PaginatedResponse<T> {
   results: T[]
   pagination: PaginationMeta
 }
+
+export interface NamedAPIResource {
+  name: string
+  url: string
+}
+
+export interface PokemonType {
+  slot: number
+  type: NamedAPIResource
+}
