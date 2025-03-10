@@ -1,58 +1,58 @@
-import { motion } from 'framer-motion';
-import { Controller, useForm } from 'react-hook-form';
-import { usePokemonList } from '../../hooks/usePokemonList';
-import { usePokemonSelection } from '../../hooks/usePokemonSelection';
-import { Pokemon, SelectOption } from '../../types';
-import InputField from '../ui/InputField';
-import { Select } from '../ui/Select';
+import { motion } from 'framer-motion'
+import { Controller, useForm } from 'react-hook-form'
+import { usePokemonList } from '../../hooks/usePokemonList'
+import { usePokemonSelection } from '../../hooks/usePokemonSelection'
+import { Pokemon, SelectOption } from '../../types'
+import InputField from '../ui/InputField'
+import { Select } from '../ui/Select'
 
 interface TrainerFormProps {
-  onFormSubmit: (data: { firstName: string; lastName: string; team: Pokemon[] }) => void;
+  onFormSubmit: (data: { firstName: string; lastName: string; team: Pokemon[] }) => void
 }
 
 interface FormValues {
-  firstName: string;
-  lastName: string;
-  pokemonTeam: SelectOption[];
+  firstName: string
+  lastName: string
+  pokemonTeam: SelectOption[]
 }
 
 export const TrainerForm = ({ onFormSubmit }: TrainerFormProps) => {
-  const { 
-    pokemonOptions, 
-    loading, 
-    loadMorePokemon, 
-    searchPokemon 
-  } = usePokemonList();
-  
-  const { selectedPokemon, handlePokemonSelection } = usePokemonSelection();
-  
-  const { register, handleSubmit, control, formState: { errors } } = useForm<FormValues>({
+  const { pokemonOptions, loading, loadMorePokemon, searchPokemon } = usePokemonList()
+
+  const { selectedPokemon, handlePokemonSelection } = usePokemonSelection()
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
     defaultValues: {
       firstName: '',
       lastName: '',
-      pokemonTeam: []
-    }
-  });
+      pokemonTeam: [],
+    },
+  })
 
   const onSubmit = (data: FormValues) => {
     onFormSubmit({
       firstName: data.firstName,
       lastName: data.lastName,
-      team: selectedPokemon
-    });
-  };
+      team: selectedPokemon,
+    })
+  }
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-full max-w-lg bg-gray-800 p-6 rounded-lg shadow-lg"
+      className="w-full max-w-2xl rounded-lg bg-gray-800 p-6 shadow-lg"
     >
-      <h2 className="text-2xl font-bold text-white mb-6">Register for Battle Tower</h2>
-      
+      <h2 className="mb-6 text-2xl font-bold text-white">Register for Battle Tower</h2>
+
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <InputField
             label="First Name"
             placeholder="Enter your first name"
@@ -63,11 +63,11 @@ export const TrainerForm = ({ onFormSubmit }: TrainerFormProps) => {
               maxLength: { value: 12, message: 'Maximum 12 characters' },
               pattern: {
                 value: /^[a-zA-Z]+$/,
-                message: 'Only letters are allowed'
-              }
+                message: 'Only letters are allowed',
+              },
             })}
           />
-          
+
           <InputField
             label="Last Name"
             placeholder="Enter your last name"
@@ -78,18 +78,18 @@ export const TrainerForm = ({ onFormSubmit }: TrainerFormProps) => {
               maxLength: { value: 12, message: 'Maximum 12 characters' },
               pattern: {
                 value: /^[a-zA-Z]+$/,
-                message: 'Only letters are allowed'
-              }
+                message: 'Only letters are allowed',
+              },
             })}
           />
         </div>
-        
+
         <div className="mt-4">
           <Controller
             control={control}
             name="pokemonTeam"
-            rules={{ 
-              validate: value => value.length === 4 || 'You must select exactly 4 Pokémon' 
+            rules={{
+              validate: (value) => value.length === 4 || 'You must select exactly 4 Pokémon',
             }}
             render={({ field }) => (
               <Select
@@ -97,8 +97,8 @@ export const TrainerForm = ({ onFormSubmit }: TrainerFormProps) => {
                 options={pokemonOptions}
                 value={field.value}
                 onChange={(selected) => {
-                  field.onChange(selected);
-                  handlePokemonSelection(selected);
+                  field.onChange(selected)
+                  handlePokemonSelection(selected)
                 }}
                 onSearch={searchPokemon}
                 maxSelections={4}
@@ -111,10 +111,10 @@ export const TrainerForm = ({ onFormSubmit }: TrainerFormProps) => {
             )}
           />
         </div>
-        
+
         <motion.button
           type="submit"
-          className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="mt-6 w-full rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -122,5 +122,5 @@ export const TrainerForm = ({ onFormSubmit }: TrainerFormProps) => {
         </motion.button>
       </form>
     </motion.div>
-  );
-};
+  )
+}

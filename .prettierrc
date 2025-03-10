@@ -1,0 +1,31 @@
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "always",
+  "proseWrap": "preserve",
+  "htmlWhitespaceSensitivity": "css",
+  "endOfLine": "lf",
+  "jsxSingleQuote": false,
+  "plugins": ["prettier-plugin-tailwindcss"],
+   "tailwindStylesheet": "./src/index.css",
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "options": {
+        "printWidth": 120
+      }
+    },
+    {
+      "files": ["*.json", "*.json5"],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}
